@@ -24,7 +24,7 @@ public class Calculator
         if (s.equals("")) {
             return null;
         }
-        return s.toUpperCase(s);
+        return s.toUpperCase();
     }
 
 

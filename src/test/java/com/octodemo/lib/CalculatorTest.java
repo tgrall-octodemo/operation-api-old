@@ -25,7 +25,7 @@ public class CalculatorTest
     @Test
     void testSimpleMethods() {
         assertEquals(null, calculator.toUpper(""));
-        assertEquals("DEMO", calculator.toString("dEmo"));
+        assertEquals("DEMO", calculator.toUpper("dEmo"));
     }
 
 

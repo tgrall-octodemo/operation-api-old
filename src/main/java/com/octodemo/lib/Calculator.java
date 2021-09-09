@@ -27,5 +27,8 @@ public class Calculator
         return s.toUpperCase();
     }
 
+    private boolean isThataGoodMethod(int a, int b) {
+        return false;
+    }
 
 }

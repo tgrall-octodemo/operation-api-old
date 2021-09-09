@@ -2,4 +2,5 @@ name: "Custom CodeQL configuration"
 
 queries:
   - uses: security-and-quality
+  - uses: ./.github/codeql/custom-suite.qls
   

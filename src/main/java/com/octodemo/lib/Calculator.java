@@ -7,7 +7,7 @@ package com.octodemo.lib;
 public class Calculator
 {
 
-    private String greetings = "Welcome to the Calculator API";
+    public String greetings = "Welcome to the Calculator API";
 
 
     public int add(int a, int b) {
@@ -18,6 +18,13 @@ public class Calculator
 
     public int sub(int a, int b) {
         return a - b;
+    }
+
+    public String toUpper(String s) {
+        if (s.equals("")) {
+            return null;
+        }
+        return s.toUpperCase(s);
     }
 
 

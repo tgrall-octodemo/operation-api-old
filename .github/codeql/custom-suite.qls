@@ -21,3 +21,4 @@
       - java/tainted-arithmetic-local
       - java/unvalidated-url-redirection-local
       - java/tainted-numeric-cast-local
+      - java/examples/unusedmethod

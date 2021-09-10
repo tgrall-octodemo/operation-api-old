@@ -2,9 +2,9 @@ name: Build
 on:
   push:
     branches:
-      - foo
-  # pull_request:
-  #   types: [opened, synchronize, reopened]
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   build:
     name: Build

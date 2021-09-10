@@ -9,7 +9,7 @@
 - qlpack: codeql-java
 - include:
     id:
-      - java/missing-locale-argument
+      # - java/missing-locale-argument
       - java/path-injection-local
       - java/command-line-injection-local
       - java/xss-local

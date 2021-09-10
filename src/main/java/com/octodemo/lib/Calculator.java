@@ -28,6 +28,7 @@ public class Calculator
     }
 
     private boolean isThataGoodMethod(int a, int b) {
+        System.out.println(a);
         return false;
     }
 

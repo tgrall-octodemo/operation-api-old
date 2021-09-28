@@ -34,6 +34,14 @@ This is a Java libray available on our Internal Artifact Repository
   // result = 5
 
 
+### Multiply
+
+```java
+
+  Calcultator calcultator = new Calcultator();
+  int result = calculator.multi(8, 3);
+  // result = 5
+
 ---
 
 Made with ❤️  by 👨‍💻  -- from Nantes!!! 

@@ -25,6 +25,16 @@ This is a Java libray available on our Internal Artifact Repository
 
 ```
 
+### Division
+
+```java
+
+  Calcultator calcultator = new Calcultator();
+  int result = calculator.divide(8, 3);
+  // result = 5
+
+```
+
 ---
 
-Made with ❤️  by 👨‍💻  -- from Nantes!!! 
+Made with ❤️  by 👨‍💻  -- from Nantes & Ams!!! 

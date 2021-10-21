@@ -5,7 +5,7 @@
 
     <groupId>com.octodemo.lib</groupId>
     <artifactId>operation-api</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <name>operation-api</name>
 
     <properties>

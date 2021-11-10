@@ -8,6 +8,7 @@
 
 A powerful library to do some complex operations
 
+- Add multiplication
 
 ---
 

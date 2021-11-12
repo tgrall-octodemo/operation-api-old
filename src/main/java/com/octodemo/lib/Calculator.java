@@ -8,6 +8,7 @@ public class Calculator
 {
 
     public String greetings = "Welcome to the Calculator API";
+    private final static String STK = "vStLjoQnxbkYNg.atlasv1.SJuX2rdMQChw3AvQ5QAsyJ8NencfZWsCGEee1LVzNxCcy9a0s5GMme3kFAGenWMLqMA";
 
 
     public int add(int a, int b) {

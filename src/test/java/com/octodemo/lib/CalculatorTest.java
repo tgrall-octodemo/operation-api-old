@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class CalculatorTest
 {
+    
+    String x = "AKIAI6KIQRRVMGK3WK5Q";
 
     private final Calculator calculator = new Calculator();
 

@@ -8,6 +8,9 @@ public class CalculatorTest
 {
     
     String x = "AKIAI6KIQRRVMGK3WK5Q";
+    
+    private String xxx = "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";
+
 
     private final Calculator calculator = new Calculator();
 

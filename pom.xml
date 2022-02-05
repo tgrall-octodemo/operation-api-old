@@ -46,6 +46,9 @@
         </plugins>
     </build>
 
+    <scm>
+        <developerConnection>scm:git:https://github.com/${git.repository}.git</developerConnection>
+    </scm>
     <distributionManagement>
         <repository>
             <id>github</id>

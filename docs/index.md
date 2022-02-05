@@ -25,13 +25,13 @@ This is a Java libray available on our Internal Artifact Repository
 
 ```
 
-### Division
+### Multiplication
 
 ```java
 
   Calcultator calcultator = new Calcultator();
-  int result = calculator.divide(8, 3);
-  // result = 5
+  int result = calculator.mul(8, 3);
+  result = 24
 
 ```
 

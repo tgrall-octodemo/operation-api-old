@@ -9,4 +9,9 @@ public class Calculator
         return a - b;
     }
 
+    // add function to multiply
+    public int mul(int a, int b) {
+        return a * b;
+    }
+
 }

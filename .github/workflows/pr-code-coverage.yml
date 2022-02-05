@@ -1,0 +1,147 @@
+name: Pull Request Code Coverage
+
+#
+# This workflow will check the Pull Request changed files and run a code coverage check using Jacoco from Maven
+#   it will then validate the coverage results against a minumum threshold set inside this workflow
+#   (but it could come from another source) and fail the workflow if the threshold has not been set.
+#
+# The head branch of the PR will also get a status check with the coverage results that could be used as a required
+#   branch protection rule if required.
+#
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  #
+  # Check to see if any source code or test code was modified
+  #
+  check_file_changes:
+    name: Check Pull Request file changes
+
+    runs-on: ubuntu-20.04
+
+    outputs:
+      require_code_coverage: ${{ steps.source_code_check.outputs.source_code_changed }}
+
+    steps:
+      - name: Check for source code file changes
+        id: source_code_check
+        uses: actions/github-script@v4.1.0
+        with:
+          script: |
+            const changedFiles = await github.paginate("GET /repos/{owner}/{repo}/pulls/{pull_number}/files", {
+              ...context.repo,
+              pull_number: context.issue.number
+            });
+            let sourceChanged = false;
+            core.startGroup('Pull Request files');
+            if (changedFiles) {
+              changedFiles.forEach(file => {
+                if (!sourceChanged) {
+                  const filename = file.filename;
+                  core.info(`. modified file: ${filename}`);
+                  sourceChanged =  filename.startsWith('src/main/java') || filename.startsWith('src/test/java');
+                }
+              })
+            }
+            core.endGroup();
+            core.info(`Source code files changed? ${sourceChanged}`);
+            core.setOutput('source_code_changed' , sourceChanged);
+
+  #
+  # Perform code coverage check, but only if the source code or test code was modified.
+  #
+  code_coverage:
+    name: Jacoco Code Coverage
+
+    # Only run if source files changed that could impact code coverage
+    if: needs.check_file_changes.outputs.require_code_coverage == 'true'
+
+    needs:
+      - check_file_changes
+
+    runs-on: ubuntu-20.04
+
+    env:
+      COVERAGE_MIN_PERCENT: 35
+      COVERAGE_REPORT_DIRECTORY: coverage-report
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          java-package: jdk
+          distribution: temurin
+          # Using the integrated cache functionality to speed up builds
+          cache: maven
+
+      - name: Run maven tests with Jacoco coverage
+        run: |
+          mvn test -B -Pcoverage-per-test
+
+      # Required to execute ReportGenerator action
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Generate coverage report
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.0.0
+        with:
+          reports: target/site/jacoco/jacoco.xml
+          sourcedirs: src/main/java
+          targetdir: ${{ env.COVERAGE_REPORT_DIRECTORY }}
+          reporttypes: MarkdownSummary;TextSummary
+          toolpath: reportgeneratortool
+
+      - name: Generate coverage markdown
+        id: covgen
+        run: |
+          covPerc=$(cat Summary.txt | grep "Line coverage" | sed -r 's/Line coverage: (.*)%/\1/' | sed -e 's/^[ \t]*//')
+          echo Coverage percentage is $covPerc
+
+          # generate a badge based on the coverage percentage
+          color="red"
+          state="failure"
+          if [[ "$covPerc" > "${{ env.COVERAGE_MIN_PERCENT }}" ]]; then
+            color="success"
+            state="success"
+          fi
+          badge="https://img.shields.io/badge/Code%20Coverage-$covPerc%25-$color?style=plastic"
+          echo Badge is $badge
+
+          echo -e "# :umbrella: Code Coverage\n![Code Coverage]($badge)\n\n## Summary\n\n$(sed 1d Summary.md)" > Summary.md
+          echo "::set-output name=coveragePercentage::$covPerc"
+          echo "::set-output name=coverageCheckState::$state"
+        working-directory: ${{ env.COVERAGE_REPORT_DIRECTORY }}
+
+      - name: Add Coverage PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          recreate: true
+          path: ${{ env.COVERAGE_REPORT_DIRECTORY }}/Summary.md
+
+      - name: Publish Coverage as a Status
+        uses: Sibz/github-status-action@v1.1.6
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          state: ${{ steps.covgen.outputs.coverageCheckState }}
+          context: Code coverage
+          description: Code coverage ${{ steps.covgen.outputs.coveragePercentage }}%
+          # Need to explictly reference the head branch SHA
+          sha: ${{ github.event.pull_request.head.sha }}
+
+      - name: Fail on failed coverage threshold
+        if: steps.covgen.outputs.coverageCheckState != 'success'
+        uses: actions/github-script@v4.1.0
+        with:
+          script: |
+            core.setFailed(`Coverage is below ${{ env.COVERAGE_MIN_PERCENT }}%, was detected as ${{ steps.covgen.outputs.coveragePercentage }}%.`);
+            

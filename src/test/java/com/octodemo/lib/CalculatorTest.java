@@ -22,4 +22,16 @@ public class CalculatorTest
         assertEquals(1, calculator.sub(3, 2));
     }
 
+    
+
+    @Test
+    void multiply() {
+        // add test for multiply
+        assertEquals(4, calculator.mul(2, 2));
+        assertEquals(6, calculator.mul(2, 3));
+    }
+    
+
+
+
 }

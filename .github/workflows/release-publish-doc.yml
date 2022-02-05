@@ -3,12 +3,12 @@ on:
   release:
     types: [created]
 
-permissions: write-all
-
 jobs:
   publish-release:
     name: Publish Release Documentation
     runs-on: ubuntu-latest
+    permissions: 
+      contents: write
 
     steps:
 

@@ -4,14 +4,12 @@
 
     <groupId>com.octodemo.lib</groupId>
     <artifactId>operation-api</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>operation-api</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <sonar.organization>tgrall-octodemo</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>        
     </properties>
 
     <packaging>jar</packaging>
@@ -26,7 +24,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -45,10 +42,6 @@
         </plugins>
     </build>
 
-    <scm>
-        <developerConnection>scm:git:https://github.com//tgrall-octodemo/${project.artifactId}.git</developerConnection>
-      <tag>v1.0.0</tag>
-  </scm>
     <distributionManagement>
         <repository>
             <id>github</id>
@@ -56,6 +49,5 @@
             <url>https://maven.pkg.github.com/tgrall-octodemo/${project.artifactId}/</url>
         </repository>
     </distributionManagement>
-
 
 </project>

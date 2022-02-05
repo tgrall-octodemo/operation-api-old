@@ -37,4 +37,4 @@ This is a Java libray available on our Internal Artifact Repository
 
 ---
 
-Made with ❤️  by 👨‍💻  -- from Nantes!!! 
+Made with ❤️  by 👨‍💻  -- in Nantes 🌐

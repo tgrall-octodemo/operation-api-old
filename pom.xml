@@ -4,7 +4,7 @@
 
     <groupId>com.octodemo.lib</groupId>
     <artifactId>operation-api</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>operation-api</name>
 
     <properties>
@@ -47,7 +47,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com//tgrall-octodemo/${project.artifactId}.git</developerConnection>
-      <tag>operation-api-1.0.0</tag>
+      <tag>v1.0.0</tag>
   </scm>
     <distributionManagement>
         <repository>

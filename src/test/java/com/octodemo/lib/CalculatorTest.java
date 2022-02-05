@@ -22,11 +22,4 @@ public class CalculatorTest
         assertEquals(1, calculator.sub(3, 2));
     }
 
-    @Test
-    void testSimpleMethods() {
-        assertEquals(null, calculator.toUpper(""));
-        assertEquals("DEMO", calculator.toUpper("dEmo"));
-    }
-
-
 }

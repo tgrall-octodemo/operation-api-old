@@ -35,18 +35,6 @@ This is a Java libray available on our Internal Artifact Repository
 
 ```
 
-### MagicNumber
-
-```java
-
-  Calcultator calcultator = new Calcultator();
-  int result = calculator.magicNumber(8, 3);
-  // result = 5
-
-```
-
-
-
 ---
 
 Made with ❤️  by 👨‍💻  -- from Nantes & Ams!!! 

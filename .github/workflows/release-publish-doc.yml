@@ -19,6 +19,7 @@ jobs:
       - id: refresh-gh-pages
         name: "Refresh Doc Branch"
         run: |
+          git remote -v
           git branch
           git rebase origin/main
           git push origin gh-pages          

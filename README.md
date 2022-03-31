@@ -14,4 +14,4 @@ A _powerful_ Java library with basic math operations.
 [Documentation powered by GitHub Pages](https://fluffy-invention-f46995f1.pages.github.io/)
 
 ---
-C 2021-2022
+Copyright 2021-2022

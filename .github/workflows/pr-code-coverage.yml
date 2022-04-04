@@ -93,7 +93,7 @@ jobs:
           dotnet-version: 5.0.x
 
       - name: Generate coverage report
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.0.0
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.1.4
         with:
           reports: target/site/jacoco/jacoco.xml
           sourcedirs: src/main/java

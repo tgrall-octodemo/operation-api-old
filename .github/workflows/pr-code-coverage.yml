@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Check for source code file changes
         id: source_code_check
-        uses: actions/github-script@v4.1.0
+        uses: actions/github-script@v6.3.3
         with:
           script: |
             const changedFiles = await github.paginate("GET /repos/{owner}/{repo}/pulls/{pull_number}/files", {
@@ -140,7 +140,7 @@ jobs:
 
       - name: Fail on failed coverage threshold
         if: steps.covgen.outputs.coverageCheckState != 'success'
-        uses: actions/github-script@v4.1.0
+        uses: actions/github-script@v6.3.3
         with:
           script: |
             core.setFailed(`Coverage is below ${{ env.COVERAGE_MIN_PERCENT }}%, was detected as ${{ steps.covgen.outputs.coveragePercentage }}%.`);

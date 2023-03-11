@@ -1,0 +1,11 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: demo
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+-          hostIPC: true
